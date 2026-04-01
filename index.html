@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChocoWay — 2 Haftalik Strategiya</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brown-dark: #2C1A0E;
+    --brown-mid: #5C3317;
+    --brown-light: #8B5E3C;
+    --caramel: #C47F3A;
+    --cream: #F5ECD7;
+    --gold: #E8B84B;
+    --red: #C0392B;
+    --green: #27AE60;
+    --blue: #2980B9;
+    --white: #FFFDF8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--brown-dark);
+    color: var(--cream);
+    font-family: 'Nunito', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 40px 20px;
+    background: radial-gradient(ellipse at 50% 0%, #5C3317 0%, #2C1A0E 70%);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,127,58,0.15) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+  }
+
+  .hero-tag {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(232,184,75,0.1);
+    border: 1px solid rgba(232,184,75,0.3);
+    padding: 8px 20px;
+    border-radius: 100px;
+    margin-bottom: 30px;
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(40px, 8vw, 90px);
+    font-weight: 900;
+    line-height: 1;
+    animation: fadeDown 0.8s 0.2s ease both;
+  }
+
+  .hero h1 span { color: var(--gold); display: block; }
+
+  .hero-sub {
+    font-size: 18px;
+    color: rgba(245,236,215,0.7);
+    margin-top: 20px;
+    max-width: 500px;
+    line-height: 1.6;
+    animation: fadeDown 0.8s 0.4s ease both;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 50px;
+    animation: fadeDown 0.8s 0.6s ease both;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .stat-box {
+    text-align: center;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 20px 30px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+  }
+
+  .stat-box .num {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--gold);
+  }
+
+  .stat-box .label {
+    font-size: 13px;
+    color: rgba(245,236,215,0.6);
+    margin-top: 4px;
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTION */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 20px;
+  }
+
+  .section-tag {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--caramel);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .section-desc {
+    font-size: 16px;
+    color: rgba(245,236,215,0.65);
+    line-height: 1.7;
+    max-width: 600px;
+    margin-bottom: 50px;
+  }
+
+  /* PROBLEM SECTION */
+  .problems-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .problem-card {
+    background: rgba(192,57,43,0.08);
+    border: 1px solid rgba(192,57,43,0.25);
+    border-radius: 20px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .problem-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(192,57,43,0.5);
+  }
+
+  .problem-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--red), transparent);
+  }
+
+  .problem-icon {
+    font-size: 32px;
+    margin-bottom: 14px;
+  }
+
+  .problem-card h3 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #FF6B6B;
+  }
+
+  .problem-card p {
+    font-size: 14px;
+    color: rgba(245,236,215,0.65);
+    line-height: 1.6;
+  }
+
+  /* STRATEGY SECTION */
+  .strategy-divider {
+    background: linear-gradient(135deg, #3D2010 0%, #2C1A0E 100%);
+    border-top: 1px solid rgba(196,127,58,0.2);
+    border-bottom: 1px solid rgba(196,127,58,0.2);
+    padding: 80px 20px;
+  }
+
+  .strategy-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  @media (max-width: 700px) {
+    .two-col { grid-template-columns: 1fr; }
+  }
+
+  .platform-card {
+    border-radius: 24px;
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .platform-card.instagram {
+    background: linear-gradient(135deg, rgba(131,58,180,0.15), rgba(253,29,29,0.1));
+    border: 1px solid rgba(180,90,200,0.25);
+  }
+
+  .platform-card.telegram {
+    background: linear-gradient(135deg, rgba(41,128,185,0.15), rgba(41,128,185,0.05));
+    border: 1px solid rgba(41,128,185,0.25);
+  }
+
+  .platform-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+
+  .instagram .platform-label {
+    background: rgba(180,90,200,0.2);
+    color: #DA70D6;
+    border: 1px solid rgba(180,90,200,0.3);
+  }
+
+  .telegram .platform-label {
+    background: rgba(41,128,185,0.2);
+    color: #5DADE2;
+    border: 1px solid rgba(41,128,185,0.3);
+  }
+
+  .platform-card h3 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .step-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .step-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(245,236,215,0.8);
+  }
+
+  .step-num {
+    min-width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .instagram .step-num { background: rgba(180,90,200,0.3); color: #DA70D6; }
+  .telegram .step-num { background: rgba(41,128,185,0.3); color: #5DADE2; }
+
+  /* 5 QUESTIONS */
+  .questions-section {
+    background: var(--brown-dark);
+    padding: 80px 20px;
+  }
+
+  .questions-inner { max-width: 1100px; margin: 0 auto; }
+
+  .questions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 40px;
+  }
+
+  .question-card {
+    background: rgba(232,184,75,0.06);
+    border: 1px solid rgba(232,184,75,0.2);
+    border-radius: 20px;
+    padding: 28px 22px;
+    transition: all 0.3s ease;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .question-card:hover {
+    background: rgba(232,184,75,0.12);
+    border-color: rgba(232,184,75,0.45);
+    transform: translateY(-4px);
+  }
+
+  .q-number {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: rgba(232,184,75,0.15);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .question-card h4 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .question-card p {
+    font-size: 13px;
+    color: rgba(245,236,215,0.6);
+    line-height: 1.6;
+  }
+
+  /* SCENARIOS */
+  .scenarios-section {
+    background: linear-gradient(180deg, #2C1A0E 0%, #1a0f06 100%);
+    padding: 80px 20px;
+  }
+
+  .scenarios-inner { max-width: 1100px; margin: 0 auto; }
+
+  .scenario-row {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 20px;
+    align-items: start;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 22px 24px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+  }
+
+  .scenario-row:hover {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(196,127,58,0.3);
+    transform: translateX(4px);
+  }
+
+  .s-num {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: rgba(196,127,58,0.3);
+    line-height: 1;
+  }
+
+  .s-content h4 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--cream);
+  }
+
+  .s-content p {
+    font-size: 13px;
+    color: rgba(245,236,215,0.55);
+    line-height: 1.5;
+  }
+
+  .s-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 100px;
+    white-space: nowrap;
+    font-family: 'Unbounded', sans-serif;
+    letter-spacing: 0.5px;
+  }
+
+  .badge-edu { background: rgba(39,174,96,0.2); color: #58D68D; border: 1px solid rgba(39,174,96,0.3); }
+  .badge-review { background: rgba(41,128,185,0.2); color: #5DADE2; border: 1px solid rgba(41,128,185,0.3); }
+  .badge-b2b { background: rgba(232,184,75,0.2); color: var(--gold); border: 1px solid rgba(232,184,75,0.3); }
+  .badge-emotion { background: rgba(192,57,43,0.2); color: #FF6B6B; border: 1px solid rgba(192,57,43,0.3); }
+  .badge-interactive { background: rgba(155,89,182,0.2); color: #C39BD3; border: 1px solid rgba(155,89,182,0.3); }
+
+  /* PROCESS */
+  .process-section {
+    background: rgba(92,51,23,0.2);
+    border-top: 1px solid rgba(196,127,58,0.15);
+    border-bottom: 1px solid rgba(196,127,58,0.15);
+    padding: 80px 20px;
+  }
+
+  .process-inner { max-width: 1100px; margin: 0 auto; }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0;
+    margin-top: 50px;
+    position: relative;
+  }
+
+  .process-step {
+    padding: 0 24px 0 0;
+    position: relative;
+  }
+
+  .process-step:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: 0;
+    top: 20px;
+    font-size: 20px;
+    color: var(--caramel);
+    opacity: 0.5;
+  }
+
+  @media (max-width: 700px) {
+    .process-step:not(:last-child)::after { display: none; }
+    .process-steps { gap: 20px; }
+  }
+
+  .step-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--caramel), var(--brown-mid));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--white);
+    margin-bottom: 16px;
+    box-shadow: 0 4px 20px rgba(196,127,58,0.3);
+  }
+
+  .process-step h4 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--gold);
+  }
+
+  .process-step p {
+    font-size: 13px;
+    color: rgba(245,236,215,0.6);
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 60px 20px;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: rgba(245,236,215,0.3);
+  }
+
+  .footer span { color: var(--gold); }
+
+  /* DIVIDER */
+  .sec-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(196,127,58,0.3), transparent);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ALERT BOX */
+  .alert-box {
+    background: rgba(232,184,75,0.08);
+    border: 1px solid rgba(232,184,75,0.25);
+    border-left: 4px solid var(--gold);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-top: 40px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(245,236,215,0.8);
+  }
+
+  .alert-box strong { color: var(--gold); font-family: 'Unbounded', sans-serif; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">SMM Strategiya · 2026 · 2 Hafta</div>
+  <h1>CHOCO<span>WAY</span></h1>
+  <p class="hero-sub">Instagram va Telegram uchun aniq, maqsadli 2 haftalik harakat rejasi — savdoga ta'sir qiladigan kontent bilan.</p>
+  <div class="hero-stats">
+    <div class="stat-box">
+      <div class="num">2,123</div>
+      <div class="label">Instagram obunachi</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">125</div>
+      <div class="label">Telegram obunachi</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">629K</div>
+      <div class="label">Oylik ko'rishlar</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">307</div>
+      <div class="label">Doimiy mijozlar</div>
+    </div>
+  </div>
+</div>
+
+<!-- MUAMMOLAR -->
+<section>
+  <div class="section-tag">01 — Muammo Tahlili</div>
+  <h2 class="section-title">Nima to'xtab qolgan?</h2>
+  <p class="section-desc">Kontent chiqmoqda, video sifatli, lekin natija yo'q. Sababi quyida.</p>
+
+  <div class="problems-grid">
+    <div class="problem-card">
+      <div class="problem-icon">📉</div>
+      <h3>Instagram aktivligi tushgan</h3>
+      <p>Story ko'ruvchilar 350 → 200 ga tushdi. Algoritm sizni kamroq ko'rsatmoqda, chunki so'nggi kontentlar yetarli engagement olmagan.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">💀</div>
+      <h3>Telegram o'lik holda</h3>
+      <p>125 obunachi, 1 oydan beri o'sish yo'q. Instagram kontenti copy-paste qilinmoqda — Telegram uchun alohida "sabab" yo'q.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🎯</div>
+      <h3>Target faqat "views" uchun</h3>
+      <p>629K ko'rish bor, lekin followers o'smayapti. Target ko'rish uchun sozlangan, obunachi va savdo uchun emas.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">⏱️</div>
+      <h3>Javob tezligi sekin</h3>
+      <p>DM ga o'rtacha 2 soat 3 daqiqada javob. 31% so'rovlar javobsiz. Bu savdoni to'g'ridan-to'g'ri yo'qotish.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">📦</div>
+      <h3>Kontent savdoga ulanmagan</h3>
+      <p>Video sifatli, lekin har bir video "nima uchun?" savoliga javob bermayapti. Brend awareness bilan savdo orasida ko'prik yo'q.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🏢</div>
+      <h3>B2B ko'rinmayapti</h3>
+      <p>Optom auditoriyasi — do'kon egalari, qandolatchilar — hozirgi kontent ularni jalb qilmayapti. B2B uchun alohida signal yo'q.</p>
+    </div>
+  </div>
+</section>
+
+<div class="sec-divider"></div>
+
+<!-- STRATEGIYA -->
+<div class="strategy-divider">
+  <div class="strategy-inner">
+    <div class="section-tag">02 — Platforma Strategiyasi</div>
+    <h2 class="section-title">Instagram va Telegram — ikki alohida rol</h2>
+    <p class="section-desc">Har bir platforma o'z maqsadi bilan ishlashi kerak. Bir xil kontent ikki joyga tashlash — ikkalasini ham o'ldiradi.</p>
+
+    <div class="two-col">
+      <!-- INSTAGRAM -->
+      <div class="platform-card instagram">
+        <div class="platform-label">📸 Instagram</div>
+        <h3>Brend ko'rinishi + Savdo kanali</h3>
+        <ul class="step-list">
+          <li>
+            <span class="step-num">1</span>
+            <span><strong>Saves va Shares keltiradigan kontent</strong> — "Dubay shokoladini soxta/asliysini farqlash — 4 ta belgi" → Onalar saqlaydi, ulashadi.</span>
+          </li>
+          <li>
+            <span class="step-num">2</span>
+            <span><strong>Izoh keltiradigan savol</strong> — Har bir reelsda 1 ta oddiy savol: "Siz qaysi shokoladni yoqtirasiz?" → Hamma javob beradi.</span>
+          </li>
+          <li>
+            <span class="step-num">3</span>
+            <span><strong>Stories interaktiv bo'lishi kerak</strong> — Har kuni 1 ta so'rovnoma yoki slider. Faqat mahsulot rasm emas.</span>
+          </li>
+          <li>
+            <span class="step-num">4</span>
+            <span><strong>Target → Followers/Engagement ga</strong> — Hozirgi Views target emas. Obunachi va DM jalb qiluvchi targetga o'tish.</span>
+          </li>
+          <li>
+            <span class="step-num">5</span>
+            <span><strong>DM javob tezligi — 30 daqiqaga tushirish</strong> — 2 soatlik javob savdoni o'ldiradi.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- TELEGRAM -->
+      <div class="platform-card telegram">
+        <div class="platform-label">✈️ Telegram</div>
+        <h3>B2B markaz + Eksklyuziv narxlar</h3>
+        <ul class="step-list">
+          <li>
+            <span class="step-num">1</span>
+            <span><strong>Telegramga alohida sabab kerak</strong> — "Optom va chakana uchun eng arzon narxlar FAQAT shu yerda." Bu B2B auditoriyasini tortadi.</span>
+          </li>
+          <li>
+            <span class="step-num">2</span>
+            <span><strong>Haftalik eksklyuziv narx post</strong> — "Bu hafta Telegram narxi: Dubay shokoladi 1 kg = X so'm. Instagramda yo'q." — Bu obuna bo'ldiradi.</span>
+          </li>
+          <li>
+            <span class="step-num">3</span>
+            <span><strong>Instagram → Telegram ko'prigi</strong> — Har bir reels oxirida: "Narxini bilmoqchimisiz? Telegram kanalimizda 👇" — eng arzon o'sish usuli.</span>
+          </li>
+          <li>
+            <span class="step-num">4</span>
+            <span><strong>Seeding — 1K+ kanallar</strong> — Oziq-ovqat, uy bekasi, qandolatchi, tadbirkor kanallardan reklama. Faqat maqsadli auditoriya.</span>
+          </li>
+          <li>
+            <span class="step-num">5</span>
+            <span><strong>Ombor va zaxira postlari</strong> — "Mahsulot tugamasdan oldin optom narxda oling" — B2B uchun real signal.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="alert-box">
+      <strong>🔑 ASOSIY QOIDA:</strong> Instagram = ko'pchilik uchun brend va savdo. Telegram = B2B va eksklyuziv narx uchun VIP kanal. Ikkalasiga bir xil kontent tashlash — ikkalasini ham zaiflashtiradi.
+    </div>
+  </div>
+</div>
+
+<!-- 5 SAVOL -->
+<div class="questions-section">
+  <div class="questions-inner">
+    <div class="section-tag">03 — Ssenariy Filtri</div>
+    <h2 class="section-title">Har bir videoni yozishdan oldin — 5 savol</h2>
+    <p class="section-desc">Agar bu 5 savolga aniq javob yo'q bo'lsa — o'sha ssenariy yozilmaydi. Chunki har bir video resurs sarflaydi.</p>
+
+    <div class="questions-grid">
+      <div class="question-card">
+        <div class="q-number">01</div>
+        <h4>Nima uchun LIKE bosadi?</h4>
+        <p>Odamlar qaysi his tufayli like bosishini aniq bilish kerak — rozi bo'lish, hayrat, kulgi, zavq.</p>
+      </div>
+      <div class="question-card">
+        <div class="q-number">02</div>
+        <h4>Nima uchun IZOH yozadi?</h4>
+        <p>Video qaysi savol yoki his tufayli odamni gapirtirishini oldindan o'ylash kerak.</p>
+      </div>
+      <div class="question-card">
+        <div class="q-number">03</div>
+        <h4>Nima uchun ULASHADI?</h4>
+        <p>Do'stiga, oilasiga, kanaliga yuborish uchun real sabab bo'lishi kerak — foydali yoki kulgili.</p>
+      </div>
+      <div class="question-card">
+        <div class="q-number">04</div>
+        <h4>Qanday HISSIYOT beradi?</h4>
+        <p>Hayrat? Istak? Qiziqish? Ishonch? Har bir videoning 1 ta aniq emotsiyasi bo'lishi kerak.</p>
+      </div>
+      <div class="question-card">
+        <div class="q-number">05</div>
+        <h4>KO'P ko'riladi deb o'ylaysanmi?</h4>
+        <p>Realistik baholash — shunga o'xshash kontent ilgari qanday natija bergani asosida prognoz.</p>
+      </div>
+    </div>
+
+    <div class="alert-box">
+      <strong>⚠️ MUHIM:</strong> Brend awareness kontent ham oxir-oqibat sotuvga ta'sir qilishi kerak. Medianing maqsadi — sotuv. Agar video faqat "ko'rinish" uchun bo'lsa, u bir tiyinga qimmat.
+    </div>
+  </div>
+</div>
+
+<div class="sec-divider"></div>
+
+<!-- 10 SSENARIY -->
+<div class="scenarios-section">
+  <div class="scenarios-inner">
+    <div class="section-tag">04 — 10 ta Ssenariy Yo'nalishlari</div>
+    <h2 class="section-title">Syomkaga borish uchun — 10 ta kontent turi</h2>
+    <p class="section-desc">Har bir ssenariy aniq maqsad bilan. 5 savolga javob berganidan keyin to'liq yoziladi.</p>
+
+    <div class="scenario-row">
+      <div class="s-num">01</div>
+      <div class="s-content">
+        <h4>Palma yog'ini aniqlash — 3 ta belgi</h4>
+        <p>Onalar va sog'lom ovqat izlovchilar uchun. Saqlanadi, ulashiladi. "Bu menga kerak" hissi.</p>
+      </div>
+      <span class="s-badge badge-edu">EDU</span>
+    </div>
+
+    <div class="scenario-row">
+      <div class="s-num">02</div>
+      <div class="s-content">
+        <h4>Dubay shokoladi degustatsiya — 7 ta tur</h4>
+        <p>Qiziqish + istak + "men ham tatib ko'rmoqchiman" hissi. Like va izoh garantiya.</p>
+      </div>
+      <span class="s-badge badge-review">OBZOR</span>
+    </div>
+
+    <div class="scenario-row">
+      <div class="s-num">03</div>
+      <div class="s-content">
+        <h4>100 mingga nima olish mumkin? — savat ko'rsatish</h4>
+        <p>E'tirozga javob. "Qimmat" degan fikrni buzadi. Ulashiladi — "qarang, arzon ekan!"</p>
+      </div>
+      <span class="s-badge badge-emotion">E'TIROZ</span>
+    </div>
+
+    <div class="scenario-row">
+      <div class="s-num">04</div>
+      <div class="s-content">
+        <h4>Optom xaridor uchun — 1 karobka nechaga tushadi?</h4>
+        <p>B2B uchun aniq signal. Do'kon egalari DM qiladi → savdo keladi. Telegram uchun ham kuchli.</p>
+      </div>
+      <span class="s-badge badge-b2b">B2B</span>
+    </div>
+
+    <div class="scenario-row">
+      <div class="s-num">05</div>
+      <div class="s-content">
+        <h4>Zaytun yog'ining 5 ta foydasi — yurak va teri uchun</h4>
+        <p>Edu + sog'lom hayot. Onalar saqlaydi. Ishonch uyg'otadi. Brend ekspert sifatida ko'rinadi.</p>
+      </div>
+      <span class="s-badge badge-edu">EDU</span>
+    </div>
+
+    <div class="scenario-row">
+      <div class="s-num">06</div>
+      <div class="s-content">
+        <h4>Nega uzoqqa borishga arziydi? — do'kon tour</h4>
+        <p>E'tirozga javob. Do'kon ko'rinishi, assortiment, atmosfera. "Men ham bormoqchiman" hissi.</p>
+      </div>
+      <span class="s-badge badge-emotion">E'TIROZ</span>
+    </div>
+
+    <div class="scenario-row">
+      <div class="s-num">07</div>
+      <div class="s-content">
+        <h4>Shu mahsulot boshqa joyda qancha? Bizda qancha?</h4>
+        <p>Raqobat tahlili. Ulashiladi, bahsli izohlar keladi. Narx ustunligini ko'rsatadi.</p>
+      </div>
+      <span class="s-badge badge-review">TAHLIL</span>
+    </div>
+
+    <div class="scenario-row">
+      <div class="s-num">08</div>
+      <div class="s-content">
+        <h4>Qandolatchi uchun — eng sifatli kakao yog'i qayerdan?</h4>
+        <p>Qandolatchilar va kafe egalari uchun. B2B auditoriyasini to'g'ridan-to'g'ri qamrab oladi.</p>
+      </div>
+      <span class="s-badge badge-b2b">B2B</span>
+    </div>
+
+    <div class="scenario-row">
+      <div class="s-num">09</div>
+      <div class="s-content">
+        <h4>Gramm topish musobaqasi — Dubay shokoladi</h4>
+        <p>Interaktiv. Izohlar ko'payadi → algoritm ko'proq tarqatadi. Erishish oson, qiziqarli.</p>
+      </div>
+      <span class="s-badge badge-interactive">CHELLENJ</span>
+    </div>
+
+    <div class="scenario-row">
+      <div class="s-num">10</div>
+      <div class="s-content">
+        <h4>Sovg'a savatini yig'ish — 200 ming so'mga</h4>
+        <p>Sovg'a izlovchilar uchun. Estetik, ilhom beruvchi. Saqlash va ulashish ko'p bo'ladi.</p>
+      </div>
+      <span class="s-badge badge-emotion">HISSIYOT</span>
+    </div>
+  </div>
+</div>
+
+<!-- JARAYON -->
+<div class="process-section">
+  <div class="process-inner">
+    <div class="section-tag">05 — Harakat Rejasi</div>
+    <h2 class="section-title">Qanday davom etamiz?</h2>
+    <p class="section-desc">Strategiyadan amalga — 4 bosqich.</p>
+
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-circle">1</div>
+        <h4>Ssenariy yozish</h4>
+        <p>Har bir 10 ta ssenadriy uchun 5 savol javoblanadi. Javob yo'q → o'tkazib yuboriladi.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">2</div>
+        <h4>Syomka</h4>
+        <p>Zaxiradagi 2 haftalik videoga qo'shimcha 10 ta yangi kontent. Operator + model + AI video.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">3</div>
+        <h4>Kontent Jadval</h4>
+        <p>2 haftalik aniq jadval: qaysi kuni, qaysi vaqtda, qaysi platforma, qaysi format.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">4</div>
+        <h4>O'lchov</h4>
+        <p>Har 3 kunda tahlil: saves, shares, DM soni, Telegram o'sishi. Ishlamasa — tezda o'zgartiramiz.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>🍫 <span>CHOCOWAY</span> · Ta'mlar galereyasi · 2 Haftalik Strategiya · 2026</p>
+</div>
+
+</body>
+</html>
